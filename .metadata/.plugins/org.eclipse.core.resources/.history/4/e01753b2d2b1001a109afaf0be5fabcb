@@ -1,0 +1,20 @@
+package kr.or.ddit.vo;
+
+public class FreeboardVO {
+		private String bo_no;
+		private String bo_title;
+		private String bo_writer;
+		private String bo_nickname;
+		private String bo_pwd;
+		private String bo_mail;
+		private String bo_ip;
+		private String bo_content;
+		private String bo_hit;
+		private String bo_reg_date;
+		private String bo_status;
+		private String bo_group;
+		private String bo_seq;
+		private String bo_depth;
+		
+		
+}

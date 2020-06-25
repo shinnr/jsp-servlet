@@ -1,0 +1,19 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%
+	//클라이언트(브라우저) 보안정책 (Security Policy)
+	//		브라우저는 해당 하드웨어시스템 내 파일 또는 디렉토리에 접근은 가능하지만,
+	//		신규 파일 또는 디렉토리의 생성, 파일 및 디렉토리 수정과 삭제는 불가.
+	//		*IE ActiveX를 뢀용해서 파일 생성, 수정, 삭제가 가능
+	//서버의 파일 업로드 처리 개발환경
+	// 	1. 라이브러리 
+	//		http://commons.apache.org
+	//			commons-fileupload-1.2.2.jar
+	//			commons-io-2.3.jar
+	//		WEB-INF/lib
+	
+	//서버대상 업로드된 파일의 저장 처리 : 서버 내 특정 파일 시스템 활용
+	//						  파일 정보들은 DB 대상 저장 
+	
+	out.println(application.getRealPath("/upload"));
+%>

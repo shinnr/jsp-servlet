@@ -1,0 +1,13 @@
+package kr.or.ddit.vo;
+
+public class FileItemVO {
+	private String file_seq;
+	private String file_bo_no;
+	private String file_name;
+	private String file_save_name;
+	private String file_content_type;
+	private String file_size;
+	private String file_status;
+	private String file_reg_date;
+	private String file_down_hit;
+}

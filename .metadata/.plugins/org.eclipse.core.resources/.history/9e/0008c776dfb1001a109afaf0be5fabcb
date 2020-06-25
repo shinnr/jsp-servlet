@@ -1,0 +1,32 @@
+package kr.or.ddit.freeboard.dao;
+
+import java.util.List;
+
+import com.ibatis.sqlmap.client.SqlMapClient;
+
+import kr.or.ddit.ibatis.factory.SqlMapClientFactory;
+import kr.or.ddit.vo.FreeboardVO;
+
+public class IFreeboardDAOImpl implements IFreeboardDAO {
+	private static IFreeboardDAO dao = new IFreeboardDAOImpl();
+	private SqlMapClient client;
+	
+	private IFreeboardDAOImpl(){
+		client = SqlMapClientFactory.getSqlMapClient();
+	}
+	
+	public static IFreeboardDAO getInstance(){
+		return (dao == null) ? dao = new IFreeboardDAOImpl() : dao;
+	}
+	
+	@Override
+	public List<FreeboardVO> freeboardList() throws Exception {
+		return client.queryForList("freeboard.freeboardList");
+	}
+
+	@Override
+	public String insertFreeboard(FreeboardVO freeboardInfo) throws Exception {
+		return (String) client.insert("freeboard.insertFreeboard", freeboardInfo);
+	}
+
+}

@@ -1,0 +1,33 @@
+<%@page import="java.net.URLEncoder"%>
+<%@page import="kr.or.ddit.global.globalConstant"%>
+<%@page import="java.io.File"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%
+	String fileName = request.getParameter("fileName");
+
+	File downloadFile = new File(globalConstant.FILE_PATH, fileName);
+	
+	if(downloadFile.exists()){
+		fileName = URLEncoder.encode(fileName, "UTF-8");
+		
+		response.setHeader("Content-Disposition", "attachment;fileName=" + fileName);
+		response.setContentType("application/octet-stream");
+		response.setContentLength((int)downloadFile.length());
+		
+		// jsp 요청시 해당 jsp는 servlet클래스로 천이(자스퍼 엔진)
+		// jsp는 out이 존재하고, servlet 클래스 내 PrintWriter 상속받은 JspWriter가 존재하며,
+		// out 기본객체의 OutpurStream초기화(JSP파일 애 다운로드 처리시만 선언)
+		out.clear();
+	}
+%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+</body>
+</html>

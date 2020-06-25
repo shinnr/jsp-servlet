@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap     
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+    
+<sqlMap namespace="fileitem">
+	<typeAlias alias="fileitemVO" type="kr.or.ddit.vo.FileItemVO"/>
+	
+	<insert id="insertFileItem" parameterClass="fileitemVO">
+		<selectKey keyProperty="file_seq">
+			SELECT FILEITEM_SEQ.NEXTVAL FROM DUAL
+		</selectKey>
+		INSERT INTO FILEITEM()
+	</insert>
+</sqlMap>

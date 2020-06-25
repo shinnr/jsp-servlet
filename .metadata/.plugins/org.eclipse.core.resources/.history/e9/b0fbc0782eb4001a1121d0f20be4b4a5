@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap     
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+    
+<sqlMap namespace="buyer">
+<sql id="searchCondition">
+	<dynamic prepend="AND">
+		<isNotEmpty prepend="search_keyword" open="(" close=")">
+			<isEqual property="search_keycode" compareValue="ALL" >
+				BUYER_ID LIKE '%'|| #search_keyword#||'%'
+				OR BUYER_NAME LIKE '%'|| #search_keyword#||'%'
+				OR BUYER_CHARGER LIKE '%'|| #search_keyword#||'%'
+			</isEqual>
+			<isEqual property="search_keycode" compareValue="BUYERID" >
+				BUYER_ID LIKE '%'|| #search_keyword#||'%'
+			</isEqual>
+			<isEqual property="search_keycode" compareValue="BUYERNAME" >
+				BUYER_NAME LIKE '%'|| #search_keyword#||'%'
+			</isEqual>
+			<isEqual property="search_keycode" compareValue="BUYERCHARGER" >
+				BUYER_CHARGER LIKE '%'|| #search_keyword#||'%'
+			</isEqual>
+		</isNotEmpty>
+	</dynamic>
+</sql>
+	<typeAlias alias="buyerVO" type="kr.or.ddit.vo.BuyerVO"/>
+	
+	<select id="buyerList" parameterClass="map" resultClass="buyerVO">
+		SELECT * 
+		FROM BUYER
+		WHERE BUYER_NAME LIKE '%'||#buyer_name#||'%'
+	</select>
+	
+	<select id="buyerListAll" resultClass="java.util.HashMap">
+		SELECT *
+		FROM LPROD L INNER JOIN BUYER B
+			ON(L.LPROD_GU = B.BUYER_LGU)
+		WHERE B.BUYER_DELETE = 'n'
+		<include refid="searchCondition"/>
+	</select>
+	
+	<select id="buyerInfo" parameterClass="String" resultClass="buyerVO">
+		SELECT *
+		FROM BUYER
+		WHERE BUYER_ID = #buyer_id#
+	</select>
+	
+	<update id="deleteBuyerInfo" parameterClass="String">
+		UPDATE BUYER SET BUYER_DELETE = 'y'
+		WHERE BUYER_ID = #buyer_id#
+	</update>
+	
+	<update id="updateBuyerInfo" parameterClass="buyerVO">
+		UPDATE BUYER SET BUYER_NAME=#buyer_name#, BUYER_ADD1=#buyer_add1#,
+						BUYER_ADD2=#buyer_add2#, BUYER_COMTEL=#buyer_comtel#, BUYER_FAX=#buyer_fax#, BUYER_MAIL=#buyer_mail#,
+						BUYER_CHARGER=#buyer_charger#
+				WHERE  BUYER_ID=#buyer_id#
+	</update>
+	
+	<insert id="insertBuyerInfo" parameterClass="buyerVO">
+		insert into buyer(buyer_id,buyer_name,buyer_lgu,buyer_add1,buyer_add2, buyer_bank, buyer_comtel,buyer_fax,buyer_mail,buyer_charger)
+      values(#buyer_id#,#buyer_name#,#buyer_lgu#,#buyer_add1#,#buyer_add2#, #buyer_bank#, #buyer_comtel#,#buyer_fax#,#buyer_mail#,#buyer_charger#)
+	</insert>
+	
+	<select id="selectBuyerId" parameterClass="String" resultClass="String">
+      select max(buyer_id)
+      from buyer
+      where buyer_lgu = #buyer_lgu# 
+   </select>
+</sqlMap>

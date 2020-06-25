@@ -1,0 +1,15 @@
+package kr.or.ddit.freeboard.service;
+
+import java.util.List;
+
+import kr.or.ddit.vo.FreeboardVO;
+
+public class IFreeboardServiceImpl implements IFreeboardService {
+
+	@Override
+	public List<FreeboardVO> freeboardList() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

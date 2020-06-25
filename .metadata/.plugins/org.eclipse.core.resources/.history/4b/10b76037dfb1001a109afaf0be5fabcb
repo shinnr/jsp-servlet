@@ -1,0 +1,10 @@
+package kr.or.ddit.freeboard.dao;
+
+import java.util.List;
+
+import kr.or.ddit.vo.FreeboardVO;
+
+public interface IFreeboardDAO {
+	public List<FreeboardVO> freeboardList() throws Exception;
+	public String insertFreeboard(FreeboardVO freeboardInfo) throws Exception;
+}

@@ -1,0 +1,40 @@
+package kr.or.ddit.filter;
+
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.servlet.Filter;
+import javax.servlet.FilterChain;
+import javax.servlet.FilterConfig;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+
+public class IPCheckFilter implements Filter {
+	private static Map<String, String> ipMap;
+	
+	@Override
+	public void init(FilterConfig arg0) throws ServletException {
+		ipMap = new HashMap<String, String>();
+		ipMap.put("127.0.0.1", "A");
+		ipMap.put("0:0:0:0:0:0:0:1", "A");
+		ipMap.put("192.168.206.20", "A");
+		ipMap.put("192.168.206.16", "F");
+		ipMap.put("192.168.206.2", "F");
+	}
+	
+	
+	@Override
+	public void destroy() {
+
+	}
+
+	@Override
+	public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse,
+			FilterChain chain) throws IOException, ServletException {
+
+	}
+
+
+}

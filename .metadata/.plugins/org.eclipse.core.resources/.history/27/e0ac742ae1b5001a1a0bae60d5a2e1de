@@ -1,0 +1,5 @@
+package kr.or.ddit.fileitem.dao;
+
+public class IFileItemDAOImpl {
+
+}

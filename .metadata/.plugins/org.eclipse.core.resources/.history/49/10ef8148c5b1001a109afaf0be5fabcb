@@ -1,0 +1,27 @@
+package kr.or.ddit.freeboard.service;
+
+import java.util.List;
+
+import kr.or.ddit.freeboard.dao.FreeboardDaoImpl;
+import kr.or.ddit.freeboard.dao.IFreeboardDao;
+import kr.or.ddit.vo.FreeboardVO;
+
+public class IFreeboardServiceImpl implements IFreeboardService {
+
+   private static IFreeboardService service = new FreeboardServiceImpl();
+   private IFreeboardDao freeboardDao;
+   
+   private IFreeboardServiceImpl(){
+      freeboardDao = IFreeboardDaoImpl.getInstance();
+   }
+   
+   public static IFreeboardService getInstance(){
+      return (service == null) ? service : new FreeboardServiceImpl();
+   }
+   
+   @Override
+   public List<FreeboardVO> freeboardList() {
+      return null;
+   }
+
+}

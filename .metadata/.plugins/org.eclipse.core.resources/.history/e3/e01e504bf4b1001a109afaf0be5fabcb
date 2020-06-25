@@ -1,0 +1,69 @@
+package kr.or.ddit.freeboard.service;
+
+import java.util.List;
+import java.util.Map;
+
+import kr.or.ddit.freeboard.dao.IFreeboardDAO;
+import kr.or.ddit.freeboard.dao.IFreeboardDAOImpl;
+import kr.or.ddit.vo.FreeboardVO;
+
+public class IFreeboardServiceImpl implements IFreeboardService {
+	private static IFreeboardServiceImpl service = new IFreeboardServiceImpl();
+	private IFreeboardDAO freeboardDAO;
+	
+	private IFreeboardServiceImpl(){
+		freeboardDAO = IFreeboardDAOImpl.getInstance();
+	}
+	
+	
+	public static IFreeboardService getInstance(){
+		return (service == null) ? service = new IFreeboardServiceImpl() : service;
+	}
+	
+	@Override
+	public List<FreeboardVO> freeboardList() {
+		List<FreeboardVO> freeboardList = null;
+		try {
+			freeboardList = freeboardDAO.freeboardList();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return freeboardList;
+	}
+
+
+	@Override
+	public String insertFreeboard(FreeboardVO freeboardInfo) {
+		String bo_no = null;
+		try{
+			bo_no = freeboardDAO.insertFreeboard(freeboardInfo);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return bo_no ;
+	}
+
+
+	@Override
+	public FreeboardVO freeboardInfo(Map<String, String> params) {
+		FreeboardVO freeboardInfo = null;
+		try{
+			freeboardInfo = freeboardDAO.freeboardInfo(params);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return freeboardInfo;
+	}
+
+
+	@Override
+	public void deleteFreeboard(Map<String, String> params) {
+		try{
+			freeboardDAO.deleteFreeboard(params);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+	}
+
+}

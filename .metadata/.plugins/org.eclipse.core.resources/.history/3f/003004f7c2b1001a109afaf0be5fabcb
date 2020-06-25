@@ -1,0 +1,15 @@
+package kr.or.ddit.freeboard.dao;
+
+import java.util.List;
+
+import kr.or.ddit.vo.FreeboardVO;
+
+public class IFreeboardDAOImpl implements IFreeboardDAO {
+
+	@Override
+	public List<FreeboardVO> freeboardList() throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<typeInfoHistroy>
+<typeInfo handle="=ServletToddler/src&lt;kr.or.ddit.member.service{IMemberService.java[IMemberService" modifiers="513" timestamp="1592790359972"/>
+<typeInfo handle="=ServletToddler/src&lt;kr.or.ddit.member.dao{IMemberDAO.java[IMemberDAO" modifiers="513" timestamp="1592790382814"/>
+<typeInfo handle="=ServletToddler/D:\/B_Util\/5.ApacheTomcat\/apache-tomcat-7.0.73\/lib\/servlet-api.jar&lt;javax.servlet.http(HttpServlet.class[HttpServlet" modifiers="1057" timestamp="1478528994000"/>
+<typeInfo handle="=ddit/src&lt;kr.or.ddit.zipcode.service{IZipcodeService.java[IZipcodeService" modifiers="513" timestamp="1592188535489"/>
+<typeInfo handle="=ddit/src&lt;kr.or.ddit.zipcode.dao{IZipcodeDAO.java[IZipcodeDAO" modifiers="513" timestamp="1592189226204"/>
+<typeInfo handle="=ddit/src&lt;kr.or.ddit.buyer.service{IBuyerService.java[IBuyerService" modifiers="513" timestamp="1592791843281"/>
+<typeInfo handle="=ddit/src&lt;kr.or.ddit.buyer.dao{IBuyerDao.java[IBuyerDao" modifiers="513" timestamp="1592791874425"/>
+<typeInfo handle="=ddit/src&lt;kr.or.ddit.freeboard.service{IFreeboardService.java[IFreeboardService" modifiers="513" timestamp="1592976026351"/>
+<typeInfo handle="=ddit/src&lt;kr.or.ddit.freeboard.dao{IFreeboardDAO.java[IFreeboardDAO" modifiers="513" timestamp="1592786389229"/>
+<typeInfo handle="=ddit/D:\/B_Util\/5.ApacheTomcat\/apache-tomcat-7.0.73\/lib\/servlet-api.jar&lt;javax.servlet.http(HttpServletRequestWrapper.class[HttpServletRequestWrapper" modifiers="33" timestamp="1478528994000"/>
+<typeInfo handle="=ddit/D:\/B_Util\/2.Java\/JDK1.7\/jre\/lib\/rt.jar&lt;java.util.logging(Filter.class[Filter" modifiers="1537" timestamp="1579498331715"/>
+<typeInfo handle="=ddit/D:\/B_Util\/5.ApacheTomcat\/apache-tomcat-7.0.73\/lib\/servlet-api.jar&lt;javax.servlet(Filter.class[Filter" modifiers="1537" timestamp="1478528994000"/>
+</typeInfoHistroy>
