@@ -13,5 +13,6 @@ public interface IProdService {
 	public void updateProdInfo(ProdVO prodVO);
 	public void deleteProdInfo(Map<String, String> params);
 	public List<LProdVO> lprodList();
+	public String totalCount(Map<String, String> params);
 
 }

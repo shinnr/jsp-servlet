@@ -1,0 +1,38 @@
+package kr.or.ddit.listener;
+
+import javax.servlet.ServletContextAttributeEvent;
+import javax.servlet.ServletContextAttributeListener;
+import javax.servlet.ServletContextEvent;
+import javax.servlet.ServletContextListener;
+
+public class Log4jInitializeListener implements
+		ServletContextAttributeListener, ServletContextListener {
+
+	@Override
+	public void contextInitialized(ServletContextEvent arg0) {
+		System.out.println("Application(ServletContent)최초 인스턴스시 전파되는 이벤트 청취자 리스너");
+	}
+
+	@Override
+	public void contextDestroyed(ServletContextEvent arg0) {
+		System.out.println("Application(ServletContent)GC되기 직전 전파되는 이벤트 청취자 리스너");
+
+	}
+
+
+	@Override
+	public void attributeAdded(ServletContextAttributeEvent event) {
+		System.out.println("application.setAttribute(키, 값)저장시 전파되는 이벤트 청취자 리스너");
+	}
+
+	@Override
+	public void attributeRemoved(ServletContextAttributeEvent arg0) {
+
+	}
+
+	@Override
+	public void attributeReplaced(ServletContextAttributeEvent arg0) {
+
+	}
+
+}

@@ -13,5 +13,6 @@ public interface IProdDAO {
 	public void updateProdInfo(ProdVO prodVO) throws Exception;
 	public void deleteProdInfo(Map<String, String> params) throws Exception;
 	public List<LProdVO> lprodList() throws Exception;
+	public String totalCount(Map<String, String> params) throws Exception;
 	
 }

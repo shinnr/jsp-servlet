@@ -110,6 +110,52 @@
 		<filter-name>ipCheckFilter</filter-name>
 		<url-pattern>/02/*</url-pattern>
 	</filter-mapping>
+	
+	<filter>
+		<filter-name>fileUploadFilter</filter-name>
+		<filter-class>kr.or.ddit.filter.FileUploadFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>fileUploadFilter</filter-name>
+		<url-pattern>*.jsp</url-pattern>
+	</filter-mapping>
+	
+	<!-- 
+		13폴더 내 자원 대상 : 로그인(X)
+						main.jsp
+						main.jsp?contentPage=/13/freeboard/freeboardList.jsp
+						loginCheck.jsp
+						main.jsp?contentPage=/13/freeboard/freeboardView.jsp
+				       	로그인(O)
+						main.jsp?contentPage=/13/freeboard/freeboardForm.jsp
+						main.jsp?contentPage=/13/freeboard/insertFreeboardInfo.jsp?
+						main.jsp?contentPage=/13/freeboard/updateFreeboardInfo.jsp?
+						main.jsp?contentPage=/13/freeboard/deleteFreeboardInfo.jsp?
+		필터를 활용한 로그인 검증 체크 처리
+			filter name : loginCheckFilter
+			filter class : kr.or.ddit.filter.LoginCheckFilter
+							클라이언트 요청시 URI(request.getRequestURI()) 또는
+							서블릿 패스(request.getServletPath()) 활용으로 작성
+	 -->
+	 
+	 <!-- 
+	 	리스너 : 서블릿 2.3스펙에 최초 포함되어 웹 애플리케이션 서버(WAS, 웹 컨테이너, 서브릿 컨테이너)에서
+	 			Application(ServletContext), ServletRequest, HttpSession의 인스턴스/ GC, 
+	 			저장영역(Scope) 대상 값의 저장과 삭제, 갱신 시 전파되는 이벤트의 청취자를 의미.
+	 			
+	  -->
+	  
+	  <listener>
+	  	<listener-class>kr.or.ddit.listener.Log4jInitializeListener</listener-class>
+	  </listener>
+	  
+	  <listener>
+	  	<listener-class>kr.or.ddit.listener.CustomerServletRequestListener</listener-class>
+	  </listener>
+	  
+	  <listener>
+	  	<listener-class>kr.or.ddit.listener.SessionManager</listener-class>
+	  </listener>
 
 	<security-constraint>
 		<display-name>특정 서블릿 패스 요청 차단</display-name>

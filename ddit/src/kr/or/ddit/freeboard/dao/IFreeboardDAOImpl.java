@@ -76,4 +76,9 @@ public class IFreeboardDAOImpl implements IFreeboardDAO {
 		return bo_no;
 	}
 
+	@Override
+	public String totalCount(Map<String, String> params) throws Exception {
+		return (String) client.queryForObject("freeboard.totalCount", params);
+	}
+
 }

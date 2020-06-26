@@ -43,8 +43,15 @@
 	</select>
 	
 	<select id="memberList" resultClass="memberVO">
-		<include refid="selectAll"/>
-		<include refid="searchCondition"/>
+		SELECT B.*
+ 		FROM  ( SELECT ROWNUM RNUM, A.* 
+ 			FROM(<include refid="selectAll"/>
+ 				<include refid="searchCondition"/> ) A
+ 			) B
+ 		<![CDATA[
+	 		WHERE B.RNUM <= #startCount#
+	 		AND B.RNUM >=#endCount#
+ 		]]>
 	</select>
 	
 	<update id="deleteMember" parameterClass="map">
@@ -71,4 +78,11 @@
 		INSERT INTO MEMBER (MEM_ID, MEM_PASS,MEM_NAME, MEM_REGNO1, MEM_REGNO2, MEM_BIR, MEM_ZIP, MEM_ADD1, MEM_ADD2, MEM_HOMETEL, MEM_COMTEL, MEM_HP, MEM_MAIL, MEM_JOB, MEM_LIKE)
 		VALUES (#mem_id#, #mem_pass#,#mem_name#, #mem_regno1#, #mem_regno2#, #mem_bir#, #mem_zip#, #mem_add1#, #mem_add2#, #mem_hometel#, #mem_comtel#, #mem_hp#, #mem_mail#, #mem_job#, #mem_like#)
 	</insert>
+	
+	<select id="totalCount" parameterClass="map" resultClass="string">
+		SELECT COUNT(*)
+		FROM MEMBER
+		WHERE MEM_DELETE = 'n'
+		<include refid="searchCondition"/>
+	</select>
 </sqlMap>

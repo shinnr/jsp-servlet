@@ -1,3 +1,4 @@
+<%@page import="kr.or.ddit.utiles.RolePaginationUtil"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="java.util.Map"%>
 <%@page import="java.util.List"%>
@@ -13,6 +14,13 @@
 	<c:param name="contentPage" value="/12/buyerForm.jsp"></c:param>
 </c:url>
 <%
+
+	String curretnPage = request.getParameter("currentPage");
+
+	if(curretnPage == null){
+		curretnPage = "1";
+	}
+
 	String serach_keyword = request.getParameter("search_keyword");
 	String serach_keycode = request.getParameter("search_keycode");
 	
@@ -21,9 +29,17 @@
 	params.put("search_keycode", serach_keycode);
 
 	IBuyerService service = BuyerServiceImpl.getInstance();
+	
+	String totalCount = service.totalCount(params);
+	RolePaginationUtil pagination = new RolePaginationUtil(request, Integer.parseInt(curretnPage), Integer.parseInt(totalCount));
+	
+	params.put("startCount", String.valueOf(pagination.getStartCount()));
+	params.put("endCount", String.valueOf(pagination.getEndCount()));
+
 	List<Map<String, String>> buyerListAll = service.buyerListAll(params);
 	request.setAttribute("buyerListAll", buyerListAll);
 %>
+<c:set var="paginationMenu" value="<%=pagination.getPagingHtmls() %>"></c:set>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -42,6 +58,20 @@
 		});
 	})
 </script>
+<style type="text/css">
+	.text-center{
+		display : inline-block;		
+	}
+
+	ul {
+		list-style-type : none;
+	}
+	
+	li{
+		float : left;
+		margin : 10px;  
+	}
+</style>
 <title>Insert title here</title>
 </head>
 <body>
@@ -71,6 +101,7 @@
 		</tbody>
 	</table>
 </div>
+${paginationMenu }
 <div class="searchForm" align="right" style="margin-top: 10px;">
 	<form method="post" action="${pageContext.request.contextPath }/12/main.jsp">
 		<select name="search_keycode">

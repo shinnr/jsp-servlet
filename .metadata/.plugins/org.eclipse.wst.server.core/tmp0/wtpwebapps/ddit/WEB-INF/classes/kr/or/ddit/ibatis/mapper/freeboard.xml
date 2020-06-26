@@ -60,6 +60,10 @@
  			FROM(<include refid="selectAll"/>
  				<include refid="searchCondition"/> 
  				ORDER BY BO_GROUP, BO_SEQ DESC) A) B
+ 		<![CDATA[
+	 		WHERE B.RNUM <= #startCount#
+	 		AND B.RNUM >=#endCount#
+ 		]]>
  		ORDER BY B.RNUM DESC
 	</select>
 	
@@ -142,4 +146,12 @@
 		WHERE BO_GROUP = #bo_group#
 		AND BO_SEQ > #bo_seq#
 	</update>
+	
+	<select id="totalCount" parameterClass="map" resultClass="string">
+		SELECT COUNT(BO_NO)
+		FROM FREEBOARD
+		WHERE BO_STATUS = 'n'
+		<include refid="searchCondition"/>
+	</select>
+	
 </sqlMap>

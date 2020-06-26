@@ -39,11 +39,19 @@
 	</select>
 	
 	<select id="prodList" resultClass="prodVO" parameterClass="map">
-		SELECT *
-		FROM PROD P INNER JOIN BUYER B
-			ON(P.PROD_BUYER = B.BUYER_ID)
-		WHERE PROD_DELETE = 'n'
-		<include refid="searchCondition"/>
+		
+		SELECT C.*
+		FROM
+			(SELECT ROWNUM RNUM, A.*
+			FROM(SELECT *
+				FROM PROD P INNER JOIN BUYER B
+				ON(P.PROD_BUYER = B.BUYER_ID)
+				WHERE PROD_DELETE = 'n'
+				<include refid="searchCondition"/>)A)C
+		<![CDATA[
+	 		WHERE C.RNUM <= #startCount#
+	 		AND C.RNUM >=#endCount#
+ 		]]>
 	</select>
 	
 	<update id="deleteProdInfo" parameterClass="map">
@@ -78,5 +86,14 @@
 	<select id="lprodList" resultClass="lprodVO">
 		SELECT * 
 		FROM LPROD
+	</select>
+	
+	<select id="totalCount" parameterClass="map" resultClass="string">
+		SELECT COUNT(*)
+			FROM PROD P INNER JOIN BUYER B
+			ON(P.PROD_BUYER = B.BUYER_ID)
+			WHERE PROD_DELETE = 'n'
+			<include refid="searchCondition"/>
+
 	</select>
 </sqlMap>

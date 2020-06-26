@@ -1,3 +1,4 @@
+<%@page import="kr.or.ddit.utiles.RolePaginationUtil"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="java.util.Map"%>
 <%@page import="kr.or.ddit.vo.MemberVO"%>
@@ -10,8 +11,16 @@
 <c:url var="mainURI" value="/09/main.jsp">
 	<c:param name="contentPage" value="/09/memberView.jsp"></c:param>
 </c:url>
+
     
 <%
+
+	String currentPage = request.getParameter("currentPage");
+	
+	if(currentPage == null){
+		currentPage = "1";
+	}
+	
 	String serach_keyword = request.getParameter("search_keyword");
 	String serach_keycode = request.getParameter("search_keycode");
 	
@@ -19,12 +28,20 @@
 	params.put("search_keyword", serach_keyword);
 	params.put("search_keycode", serach_keycode);
 	
-	
 	IMemberService service = IMemberServiceImpl.getInstance();
+	
+	String totalCount = service.totalCount(params);
+	
+	RolePaginationUtil pagination = new RolePaginationUtil(request, Integer.parseInt(currentPage), Integer.parseInt(totalCount));
+	
+	params.put("startCount", String.valueOf(pagination.getStartCount()));
+	params.put("endCount", String.valueOf(pagination.getEndCount()));
+	
 	List<MemberVO> memberList = service.memberList(params);
 	
 	request.setAttribute("memberList", memberList);
 %>
+<c:set var="paginationMenu" value="<%=pagination.getPagingHtmls() %>"></c:set>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -42,7 +59,20 @@
 		});
 	});		
 </script>
+<style type="text/css">
+	.text-center{
+		display : inline-block;		
+	}
 
+	ul {
+		list-style-type : none;
+	}
+	
+	li{
+		float : left;
+		margin : 10px;  
+	}
+</style>
 </head>
 <body>
 <div id="list">
@@ -83,6 +113,7 @@
 		</tbody>
 	</table>
 </div>
+${paginationMenu }
 <div class="searchForm" align="right" style="margin-top: 10px;">
 	<form method="post" action="${pageContext.request.contextPath }/09/main.jsp">
 		<input type="text" id="search_keyword" name="search_keyword">

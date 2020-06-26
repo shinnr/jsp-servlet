@@ -101,4 +101,16 @@ public class IFreeboardServiceImpl implements IFreeboardService {
 		return bo_no ;
 	}
 
+
+	@Override
+	public String totalCount(Map<String, String> params) {
+		String totalCount = null;
+		try{
+			totalCount = freeboardDAO.totalCount(params);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return totalCount;
+	}
+
 }

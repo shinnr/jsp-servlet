@@ -57,5 +57,10 @@ public class BuyerDaoImpl implements IBuyerDao {
 	      return (String)client.queryForObject("buyer.selectBuyerId",buyer_lgu);
 	   }
 
+	@Override
+	public String totalCount(Map<String, String> params) throws Exception {
+		return (String) client.queryForObject("buyer.totalCount", params);
+	}
+
 
 }

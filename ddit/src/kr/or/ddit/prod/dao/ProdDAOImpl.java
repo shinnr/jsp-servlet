@@ -55,4 +55,9 @@ public class ProdDAOImpl implements IProdDAO{
 		return client.queryForList("prod.lprodList");
 	}
 
+	@Override
+	public String totalCount(Map<String, String> params) throws Exception {
+		return (String) client.queryForObject("prod.totalCount", params);
+	}
+
 }

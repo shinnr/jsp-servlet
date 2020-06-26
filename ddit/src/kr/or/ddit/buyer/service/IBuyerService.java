@@ -13,4 +13,5 @@ public interface IBuyerService {
 	public void updateBuyerInfo(BuyerVO buyerInfo);
 	public void insertBuyerInfo(BuyerVO buyerInfo);
 	public String selectBuyerId(String buyer_lgu);
+	public String totalCount(Map<String, String> params);
 }
